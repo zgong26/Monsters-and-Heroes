@@ -1,14 +1,14 @@
 /*
-A warrior class that extends Hero abstract class
+A sorcerer class that extends Hero abstract class
  */
-public class Warrior extends Hero {
+public class Sorcerer extends Hero{
 
-    public Warrior(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
+    public Sorcerer(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
         super(name, level, mana, strength, dexterity, agility, gold, experience);
     }
 
     @Override
-    public boolean updateLevel(){
+    public boolean updateLevel() {
         int nextLevelExp = level * 10;
         boolean levelChanged = false;
         while(experience >= nextLevelExp){
@@ -27,8 +27,8 @@ public class Warrior extends Hero {
         strength = (int)(1.05 * strength);
         dexterity = (int)(1.05 * dexterity);
         agility = (int)(1.05 * agility);
-        //warrior extra
-        strength = (int)(1.05 * strength);
+        //sorcerer extra
+        dexterity = (int)(1.05 * dexterity);
         agility = (int)(1.05 * agility);
     }
 }

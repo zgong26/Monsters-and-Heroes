@@ -1,12 +1,7 @@
 public class Exoskeleton extends Monster{
 
     public Exoskeleton(String name, int level, int strength, int defenseValue, int chance){
-        this.name = name;
-        this.level = level;
-        this.HP = level * 100;
-        this.strength = strength;
-        this.defenseValue = defenseValue;
-        this.chance = chance;
+        super(name, level, strength, defenseValue, chance);
     }
     @Override
     public void attack(Hero enemy) {

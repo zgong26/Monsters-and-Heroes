@@ -1,9 +1,5 @@
-/*
-A warrior class that extends Hero abstract class
- */
-public class Warrior extends Hero {
-
-    public Warrior(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
+public class Paladin extends Hero{
+    public Paladin(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
         super(name, level, mana, strength, dexterity, agility, gold, experience);
     }
 
@@ -27,8 +23,8 @@ public class Warrior extends Hero {
         strength = (int)(1.05 * strength);
         dexterity = (int)(1.05 * dexterity);
         agility = (int)(1.05 * agility);
-        //warrior extra
+        //paladin extra
         strength = (int)(1.05 * strength);
-        agility = (int)(1.05 * agility);
+        dexterity = (int)(1.05 * dexterity);
     }
 }

@@ -1,7 +1,7 @@
 /*
 A monster interface that declares some unique behaviors of monsters
  */
-public abstract class Monster {
+public abstract class Monster implements Character{
     String name;
     int level;
     int HP;
@@ -10,6 +10,14 @@ public abstract class Monster {
     int chance;
     boolean faint;
     Weapon monsterWeapon;
+    public Monster(String name, int level, int strength, int defenseValue, int chance){
+        this.name = name;
+        this.level = level;
+        this.HP = level * 100;
+        this.strength = strength;
+        this.defenseValue = defenseValue;
+        this.chance = chance;
+    }
 
     public String getName(){return name;}
 
@@ -19,7 +27,7 @@ public abstract class Monster {
     public int getDefenseValue() {return defenseValue;}
     public int getChance() {return chance;}
     public Weapon getMonsterWeapon() {return monsterWeapon;}
-    public boolean getFaint(){return faint;}
+    public boolean isFaint(){return faint;}
 
     public void setName(String name) {
         this.name = name;
@@ -45,6 +53,26 @@ public abstract class Monster {
 
     public void setFaint(boolean faint){this.faint = faint;}
 
-    public abstract void attack(Hero enemy);
-    public abstract String beAttacked(int rawDamage);
+    public void attack(Hero enemy){
+        int rawDamage = (int) ((strength + weaponDamage()) * 0.05);
+        enemy.beAttacked(rawDamage);
+    }
+
+    private int weaponDamage(){
+        return monsterWeapon.getDamage();
+    }
+    public String beAttacked(int rawDamage) {
+        if(dodged())
+            return "dodged";
+        rawDamage = (int) (rawDamage - defenseValue * 0.03);
+        HP -= rawDamage;
+        return String.valueOf(rawDamage);
+    }
+    private boolean dodged(){
+        double rand = Math.random() * 100;
+        if(rand <= (0.01 * chance))
+            return true;
+        return false;
+    }
 }
+
