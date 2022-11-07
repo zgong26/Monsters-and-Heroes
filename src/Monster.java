@@ -1,28 +1,24 @@
 /*
-This abstract character class encapsulates the commonplace between heroes and monsters
+A monster interface that declares some unique behaviors of monsters
  */
-public abstract class Hero {
+public abstract class Monster {
     String name;
     int level;
-    int experience;
     int HP;
-    int mana;
     int strength;
-    int dexterity;
-    int agility;
-    int gold;
-    Hand[] hands;
-    Armor[] armors;
+    int defenseValue;
+    int chance;
     boolean faint;
-    final int maxHands = 2;
-    final int maxArmors = 2;
+    Weapon monsterWeapon;
 
     public String getName(){return name;}
 
     public int getLevel(){return level;}
     public int getHP(){return HP;}
     public int getStrength(){return strength;}
-    public int getAgility(){return agility;}
+    public int getDefenseValue() {return defenseValue;}
+    public int getChance() {return chance;}
+    public Weapon getMonsterWeapon() {return monsterWeapon;}
     public boolean getFaint(){return faint;}
 
     public void setName(String name) {
@@ -41,12 +37,14 @@ public abstract class Hero {
         this.strength = strength;
     }
 
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
+    public void setDefenseValue(int defenseValue) {this.defenseValue = defenseValue;}
+
+    public void setChance(int chance) {this.chance = chance;}
+
+    public void setMonsterWeapon(Weapon monsterWeapon) {this.monsterWeapon = monsterWeapon;}
+
     public void setFaint(boolean faint){this.faint = faint;}
 
-    public abstract void attack(Monster enemy);
+    public abstract void attack(Hero enemy);
     public abstract String beAttacked(int rawDamage);
-    public abstract boolean updateLevel();
 }
