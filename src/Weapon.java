@@ -1,14 +1,15 @@
 /*
 This is the weapon interface which declares some unique properties for weapon items
  */
-public class Weapon extends Item{
+public class Weapon extends Item {
     private int damage;
     private int handsValue;
+
     public Weapon(String name, int price, int level) {
         super(name, price, level);
     }
 
-    public Weapon(String name, int price, int level, int damage, int handsValue){
+    public Weapon(String name, int price, int level, int damage, int handsValue) {
         this(name, price, level);
         this.damage = damage;
         this.handsValue = handsValue;

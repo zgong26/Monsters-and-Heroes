@@ -65,6 +65,7 @@ public abstract class Monster implements Character{
         if(dodged())
             return "dodged";
         rawDamage = (int) (rawDamage - defenseValue * 0.03);
+        rawDamage = Math.max(rawDamage, 0);
         HP -= rawDamage;
         return String.valueOf(rawDamage);
     }

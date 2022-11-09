@@ -1,13 +1,13 @@
-public class Paladin extends Hero{
-    public Paladin(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
-        super(name, level, mana, strength, dexterity, agility, gold, experience);
+public class Paladin extends Hero {
+    public Paladin(String name, int level, int mana, int strength, int agility, int dexterity, int gold, int experience) {
+        super(name, level, mana, strength, agility, dexterity, gold, experience);
     }
 
     @Override
-    public boolean updateLevel(){
+    public boolean updateLevel() {
         int nextLevelExp = level * 10;
         boolean levelChanged = false;
-        while(experience >= nextLevelExp){
+        while (experience >= nextLevelExp) {
             levelUP();
             experience -= nextLevelExp;
             levelChanged = true;
@@ -15,16 +15,16 @@ public class Paladin extends Hero{
         return levelChanged;
     }
 
-    private void levelUP(){
+    private void levelUP() {
         //base property
         level++;
         HP = level * 100;
-        mana = (int)(1.1 * mana);
-        strength = (int)(1.05 * strength);
-        dexterity = (int)(1.05 * dexterity);
-        agility = (int)(1.05 * agility);
+        mana = (int) (1.1 * mana);
+        strength = (int) (1.05 * strength);
+        dexterity = (int) (1.05 * dexterity);
+        agility = (int) (1.05 * agility);
         //paladin extra
-        strength = (int)(1.05 * strength);
-        dexterity = (int)(1.05 * dexterity);
+        strength = (int) (1.05 * strength);
+        dexterity = (int) (1.05 * dexterity);
     }
 }

@@ -8,6 +8,7 @@ public class ItemCollection {
 
     public ItemCollection() {
         items = new ArrayList<Item>();
+        addAll();
     }
 
     public static ArrayList<Item> getItems() {
