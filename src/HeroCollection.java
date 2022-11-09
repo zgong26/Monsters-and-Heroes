@@ -35,4 +35,35 @@ public class HeroCollection {
         heroes.add(new Paladin("Amaryllis_Astra", 1, 500, 500, 500, 500, 2500, 5));
         heroes.add(new Paladin("Caliber_Heist", 1, 400, 400, 400, 400, 2500, 8));
     }
+
+    public static void printAll() {
+        int index = 0;
+        System.out.println("Warriors: ");
+        while (index < heroes.size() && heroes.get(index) instanceof Warrior) {
+            Hero hero = heroes.get(index);
+            System.out.printf("%d. %s  mana: %d  strength: %d  agility: %d  dexterity: %d  initial gold: %d  initial experience points: %d\n", index + 1, hero.getName(), hero.getMana(), hero.getStrength(), hero.getAgility(), hero.getDexterity(), hero.getGold(), hero.getExperience());
+            index++;
+        }
+        System.out.println("\nSorcerers: ");
+        while (index < heroes.size() && heroes.get(index) instanceof Sorcerer) {
+            Hero hero = heroes.get(index);
+            System.out.printf("%d. %s  mana: %d  strength: %d  agility: %d  dexterity: %d  initial gold: %d  initial experience points: %d\n", index + 1, hero.getName(), hero.getMana(), hero.getStrength(), hero.getAgility(), hero.getDexterity(), hero.getGold(), hero.getExperience());
+            index++;
+        }
+        System.out.println("\nPaladins: ");
+        while (index < heroes.size() && heroes.get(index) instanceof Paladin) {
+            Hero hero = heroes.get(index);
+            System.out.printf("%d. %s  mana: %d  strength: %d  agility: %d  dexterity: %d  initial gold: %d  initial experience points: %d\n", index + 1, hero.getName(), hero.getMana(), hero.getStrength(), hero.getAgility(), hero.getDexterity(), hero.getGold(), hero.getExperience());
+            index++;
+        }
+    }
+
+    public static Hero get(int menuIndex) {
+        menuIndex--;
+        return heroes.get(menuIndex);
+    }
+
+    public static int size(){
+        return heroes.size();
+    }
 }

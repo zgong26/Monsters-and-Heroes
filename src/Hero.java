@@ -74,6 +74,10 @@ public abstract class Hero implements Character {
         return inventory;
     }
 
+    public int getExperience() {
+        return experience;
+    }
+
     public boolean isFaint() {
         return faint;
     }
@@ -174,6 +178,11 @@ public abstract class Hero implements Character {
     public Item getItem(int menuIndex) {
         menuIndex--;
         return inventory.get(menuIndex);
+    }
+
+    public void removeItem(int menuIndex){
+        menuIndex--;
+        inventory.remove(menuIndex);
     }
 
     public void addGold(int g) {

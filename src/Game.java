@@ -16,6 +16,10 @@ public class Game {
 
     public void start(){
         displayWelcome();
+        new ItemCollection();
+        new MonsterCollection();
+        new HeroCollection();
+        pickHeroes();
         System.out.println("Please enter the world size(between 5 to 10), default is 8");
         int size = ErrorControl.integerInput(5, 10);
         world = new World(size);
@@ -36,6 +40,33 @@ public class Game {
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    private void pickHeroes() {
+        HeroCollection.printAll();
+        System.out.println("Please pick up to 3 heroes to join your adventure!\nEnter '0' to end pick");
+        int i = 0;
+        ArrayList<Integer> picked = new ArrayList<>();
+        while(i < 3){
+            System.out.println("Please pick('0' to end): ");
+            int pick = ErrorControl.integerInput(0, HeroCollection.size());
+            if(pick == 0 && i == 0){
+                System.out.println("You must pick at least one hero!");
+            }
+            else if(pick == 0){
+                break;
+            }
+            else if(picked.contains(pick)){
+                System.out.println("You already picked this hero!");
+            }
+            else{
+                Hero pickedHero = HeroCollection.get(pick);
+                heroes.addHero(pickedHero);
+                System.out.printf("%s picked!\n", pickedHero.getName());
+                picked.add(pick);
+                i++;
             }
         }
     }
@@ -93,7 +124,7 @@ public class Game {
             //only when met these three conditions, calculate if next move will encounter monsters
             //16% chance to encounter monsters
             double rand = Math.random() * 100;
-            if(rand <= 16)
+            if(rand <= -1)
                 state = "battle";
         }
     }
@@ -107,7 +138,7 @@ public class Game {
         System.out.println("Welcome to the market!\n");
         while(true){
             m.displayMenu();
-            System.out.println("Which hero would like to make the trade? '0' to leave market.");
+            System.out.println("\nWhich hero would like to make the trade? '0' to leave market.");
             heroes.displayHeroes();
             int choice = ErrorControl.integerInput(0, heroes.size());
             if(choice == 0)
@@ -120,7 +151,7 @@ public class Game {
 
     private void hero_market_menu(Hero h, Market m){
         while(true){
-            System.out.println("Hero " + h.getName() + ", choose an option: \nbuy(b)\nsell(s)\ncheck inventory(i)\nchoose another hero(q)");
+            System.out.println("\nHero " + h.getName() + ", choose an option: \nbuy(b)\nsell(s)\ncheck inventory(i)\nchoose another hero(q)");
             System.out.println("Your current gold is " + h.getGold());
             String ans = ErrorControl.StringInput(new String[]{"b", "s", "i", "q"});
             if(ans.equals("q"))
@@ -165,6 +196,7 @@ public class Game {
                                 break;
                             int earn = m.buy(h.getItem(choice));
                             h.addGold(earn);
+                            h.removeItem(choice);
                             System.out.println("Sold! Current gold: " + h.getGold());
                         }
                     }

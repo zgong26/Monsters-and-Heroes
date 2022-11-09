@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
 Inventory class is used by Hero and Market to store items. It also includes necessary functions such as sorting.
@@ -12,7 +13,7 @@ public class Inventory {
     private ArrayList<IceSpell> iceSpells;
     private ArrayList<LightningSpell> lightningSpells;
 
-    public Inventory(){
+    public Inventory() {
         inventory = new ArrayList<>();
         weapons = new ArrayList<>();
         armors = new ArrayList<>();
@@ -22,90 +23,138 @@ public class Inventory {
         lightningSpells = new ArrayList<>();
     }
 
-    public void sortInventory(){
+    public void sortInventory() {
         weapons.clear();
         armors.clear();
         potions.clear();
         fireSpells.clear();
         iceSpells.clear();
         lightningSpells.clear();
-        for(Item i : inventory){
-            if(i instanceof Weapon)
+        for (Item i : inventory) {
+            if (i instanceof Weapon)
                 weapons.add((Weapon) i);
-            if(i instanceof Armor)
+            if (i instanceof Armor)
                 armors.add((Armor) i);
-            if(i instanceof Potion)
+            if (i instanceof Potion)
                 potions.add((Potion) i);
-            if(i instanceof FireSpell)
+            if (i instanceof FireSpell)
                 fireSpells.add((FireSpell) i);
-            if(i instanceof IceSpell)
+            if (i instanceof IceSpell)
                 iceSpells.add((IceSpell) i);
-            if(i instanceof LightningSpell)
+            if (i instanceof LightningSpell)
                 lightningSpells.add((LightningSpell) i);
         }
         inventory.clear();
-        weapons.forEach(weapon -> {inventory.add(weapon);});
-        armors.forEach(armor -> {inventory.add(armor);});
-        potions.forEach(potion -> {inventory.add(potion);});
-        fireSpells.forEach(fireSpell -> {inventory.add(fireSpell);});
-        iceSpells.forEach(iceSpell -> {inventory.add(iceSpell);});
-        lightningSpells.forEach(lightningSpell -> {inventory.add(lightningSpell);});
+        weapons.forEach(weapon -> {
+            inventory.add(weapon);
+        });
+        armors.forEach(armor -> {
+            inventory.add(armor);
+        });
+        potions.forEach(potion -> {
+            inventory.add(potion);
+        });
+        fireSpells.forEach(fireSpell -> {
+            inventory.add(fireSpell);
+        });
+        iceSpells.forEach(iceSpell -> {
+            inventory.add(iceSpell);
+        });
+        lightningSpells.forEach(lightningSpell -> {
+            inventory.add(lightningSpell);
+        });
     }
 
-    public void add(Item i){
+    public void add(Item i) {
         inventory.add(i);
     }
 
-    public Item remove(int index){
+    public Item remove(int index) {
         return inventory.remove(index);
     }
-    public int size(){return inventory.size();}
 
-    public void remove(Item i){
+    public int size() {
+        return inventory.size();
+    }
+
+    public void remove(Item i) {
         inventory.remove(i);
     }
 
-    public Item get(int index){
+    public Item get(int index) {
         return inventory.get(index);
     }
 
-    public void displayInventory(){
+    public void displayInventory() {
         int index = 0;
-        System.out.println("Weapon: ");
-        System.out.println("Name\tPrice\tLevel\tDamage\tRequired Hands");
-        while(index < inventory.size() && inventory.get(index) instanceof Weapon){
-            System.out.printf("%d. %s\t%d\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Weapon) inventory.get(index)).getDamage(), ((Weapon) inventory.get(index)).getHandsValue());
-            index++;
+        boolean[] typeContains = new boolean[6];
+        Arrays.fill(typeContains, false);
+        for (Item i : inventory) {
+            if (i instanceof Weapon)
+                typeContains[0] = true;
+            if (i instanceof Armor)
+                typeContains[1] = true;
+
+            if (i instanceof Potion)
+                typeContains[2] = true;
+
+            if (i instanceof FireSpell)
+                typeContains[3] = true;
+
+            if (i instanceof IceSpell)
+                typeContains[4] = true;
+
+            if (i instanceof LightningSpell)
+                typeContains[5] = true;
+
         }
-        System.out.println("Armor: ");
-        System.out.println("Name\tPrice\tLevel\tDamage Reduction");
-        while(index < inventory.size() && inventory.get(index) instanceof Armor){
-            System.out.printf("%d. %s\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Armor) inventory.get(index)).getReduce());
-            index++;
+        if (typeContains[0]) {
+            System.out.println("Weapon: ");
+            System.out.println("Name\tPrice\tLevel\tDamage\tRequired Hands");
+            while (index < inventory.size() && inventory.get(index) instanceof Weapon) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Weapon) inventory.get(index)).getDamage(), ((Weapon) inventory.get(index)).getHandsValue());
+                index++;
+            }
         }
-        System.out.println("Potion: ");
-        System.out.println("Name\tPrice\tLevel\tAttribute Increase\tAttribute Affected");
-        while(index < inventory.size() && inventory.get(index) instanceof Potion){
-            System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Potion) inventory.get(index)).getIncrease(), ((Potion) inventory.get(index)).getAttributesStr());
-            index++;
+        if (typeContains[1]) {
+            System.out.println("\nArmor: ");
+            System.out.println("Name\tPrice\tLevel\tDamage Reduction");
+            while (index < inventory.size() && inventory.get(index) instanceof Armor) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Armor) inventory.get(index)).getReduce());
+                index++;
+            }
         }
-        System.out.println("FireSpell: ");
-        System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(index < inventory.size() && inventory.get(index) instanceof FireSpell){
-            System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
-            index++;
+        if (typeContains[2]) {
+            System.out.println("\nPotion: ");
+            System.out.println("Name\tPrice\tLevel\tAttribute Increase\tAttribute Affected");
+            while (index < inventory.size() && inventory.get(index) instanceof Potion) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Potion) inventory.get(index)).getIncrease(), ((Potion) inventory.get(index)).getAttributesStr());
+                index++;
+            }
         }
-        System.out.println("IceSpell: ");
-        System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(index < inventory.size() && inventory.get(index) instanceof IceSpell){
-            System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
-            index++;
+        if (typeContains[3]) {
+            System.out.println("\nFireSpell: ");
+            System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
+            while (index < inventory.size() && inventory.get(index) instanceof FireSpell) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+                index++;
+            }
         }
-        System.out.println("LightningSpell: ");
-        System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(index < inventory.size() && inventory.get(index) instanceof LightningSpell){
-            System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
-            index++;
+        if (typeContains[4]) {
+            System.out.println("\nIceSpell: ");
+            System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
+            while (index < inventory.size() && inventory.get(index) instanceof IceSpell) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+                index++;
+            }
+        }
+        if (typeContains[5]) {
+            System.out.println("\nLightningSpell: ");
+            System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
+            while (index < inventory.size() && inventory.get(index) instanceof LightningSpell) {
+                System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+                index++;
+            }
         }
     }
 }
