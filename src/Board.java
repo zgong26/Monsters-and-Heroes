@@ -12,11 +12,7 @@ public class Board {
         this.width = width;
         board = new Cell[width][length];
         int number = 1;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < length; j++) {
-                board[i][j] = new Cell("common");
-            }
-        }
+
     }
 
     // Initialize a square board
