@@ -26,6 +26,11 @@ public class Market {
         return inventory.remove(index);
     }
 
+    public Item get(int index){
+        index--;
+        return inventory.get(index);
+    }
+
     public int buy(Item i){
         int price = i.getPrice() / 2;
         inventory.add(i);
@@ -36,4 +41,5 @@ public class Market {
     public void displayMenu(){
         inventory.displayInventory();
     }
+    public int size(){return inventory.size();}
 }

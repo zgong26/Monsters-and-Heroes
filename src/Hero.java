@@ -43,6 +43,8 @@ public abstract class Hero implements Character{
     public int getStrength(){return strength;}
     public int getAgility(){return agility;}
 
+    public int getGold() {return gold;}
+
     public Inventory getInventory() {
         return inventory;
     }
@@ -69,6 +71,8 @@ public abstract class Hero implements Character{
         this.agility = agility;
     }
     public void setFaint(boolean faint){this.faint = faint;}
+
+    public void setGold(int gold) {this.gold = gold;}
 
     public void attack(Monster enemy) {
         int rawDamage = (int) ((strength + weaponDamage()) * 0.05);
@@ -120,6 +124,15 @@ public abstract class Hero implements Character{
 
     public void addItem(Item i){
         inventory.add(i);
+    }
+
+    public Item getItem(int menuIndex){
+        menuIndex--;
+        return inventory.get(menuIndex);
+    }
+
+    public void addGold(int g){
+        gold += g;
     }
 
 

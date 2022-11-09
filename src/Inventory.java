@@ -59,6 +59,7 @@ public class Inventory {
     public Item remove(int index){
         return inventory.remove(index);
     }
+    public int size(){return inventory.size();}
 
     public void remove(Item i){
         inventory.remove(i);

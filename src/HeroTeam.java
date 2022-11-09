@@ -2,15 +2,18 @@
 This hero collection class is used to contain all hero instance objects.
  */
 import java.util.*;
-public class HeroCollection {
+public class HeroTeam {
     private ArrayList<Hero> heroes;
     private int currentHeroIndex;
     private boolean allFainted;
 
-    public HeroCollection(){
+    public HeroTeam(){
         heroes = new ArrayList<>();
         currentHeroIndex = 0;
         allFainted = false;
+    }
+    public int size(){
+        return heroes.size();
     }
 
     public void addHero(Hero h){

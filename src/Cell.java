@@ -4,9 +4,11 @@ A Cell class that represents a cell on the world board
 public class Cell {
     private String type;
     private boolean hasPlayer;//indicate whether player is on it
-    public Cell(String type){
+    private int id;
+    public Cell(String type, int id){
         this.type = type;
         hasPlayer = false;
+        this.id = id;
     }
     public void setPlayer(boolean b){
         hasPlayer = b;
@@ -14,6 +16,9 @@ public class Cell {
 
     public String getType(){
         return type;
+    }
+    public int getId(){
+        return id;
     }
 
     public String toString(){

@@ -6,6 +6,7 @@ public class World extends Board{
     private double marketPercent;
 
     private int[] playerPos;
+    private int[] marketID;
 
     public World(int size, int inaccessiblePercent, int commonPercent, int marketPercent){
         super(size);
@@ -33,29 +34,36 @@ public class World extends Board{
     public Cell getPlayerCell(){
         return board[playerPos[0]][playerPos[1]];
     }
+    public int[] getMarketID(){
+        return marketID;
+    }
 
     //this method is used to generate a random world
     public void generateWorld(){
+        int cellID = 0;
+        int marketIDPtr = 0;
         int numCell = getNumOfSquares();
         int inaccNum = (int) (numCell * inaccessiblePercent);
         int marketNum = (int)(numCell * marketPercent);
         int commonNum = numCell - inaccNum - marketNum;
+        marketID = new int[marketNum];
 
         //make sure the player doesn't get blocked at the first place
-        board[0][0] = new Cell("common");
-        board[0][1] = new Cell("common");
-        board[1][0] = new Cell("common");
+        board[0][0] = new Cell("common", cellID++);
+        board[0][1] = new Cell("common", cellID++);
+        board[1][0] = new Cell("common", cellID++);
         commonNum -= 3;
 
         ArrayList<Cell> cellList = new ArrayList<>();//create a list of cell which has same size of board, and shuffle it
         for(int i = 0; i < inaccNum; i++){
-            cellList.add(new Cell("inaccessible"));
+            cellList.add(new Cell("inaccessible", cellID++));
         }
         for(int i = 0; i < marketNum; i++){
-            cellList.add(new Cell("market"));
+            cellList.add(new Cell("market", cellID++));
+            marketID[marketIDPtr++] = cellID - 1;
         }
         for(int i = 0; i < commonNum; i++){
-            cellList.add(new Cell("common"));
+            cellList.add(new Cell("common", cellID++));
         }
 
         Collections.shuffle(cellList);

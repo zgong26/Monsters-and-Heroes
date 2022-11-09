@@ -2,12 +2,12 @@
 This hero collection class is used to contain all monster instance objects in the battle.
  */
 import java.util.*;
-public class MonsterCollection {
+public class MonsterTeam {
     private ArrayList<Monster> monsters;
     private int currentMonsterIndex;
     private boolean allFainted;
 
-    public MonsterCollection(){
+    public MonsterTeam(){
         monsters = new ArrayList<>();
         currentMonsterIndex = 0;
         allFainted = false;
