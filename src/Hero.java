@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
 This abstract character class encapsulates the commonplace between heroes and monsters
  */
@@ -14,6 +16,7 @@ public abstract class Hero implements Character{
     Hand[] hands;
     Armor[] armors;
     boolean faint;
+    ArrayList<Item> inventory;
     final int maxHands = 2;
     final int maxArmors = 2;
     public Hero(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
@@ -30,6 +33,7 @@ public abstract class Hero implements Character{
         hands[0] = new Hand("left");
         hands[1] = new Hand("right");
         armors = new Armor[maxArmors];
+        inventory = new ArrayList<>();
         faint = false;
     }
     public String getName(){return name;}
@@ -86,7 +90,7 @@ public abstract class Hero implements Character{
             return "dodged";
         for(Armor armor : armors){
             if(armor != null)
-                rawDamage -= armor.getReducedDamage(rawDamage);
+                rawDamage -= armor.getReduce();
         }
         rawDamage = Math.max(rawDamage, 0);
         HP -= rawDamage;
@@ -108,5 +112,11 @@ public abstract class Hero implements Character{
             num++;
         return num;
     }
+
+    public void addItem(Item i){
+        inventory.add(i);
+    }
+
+
     public abstract boolean updateLevel();
 }

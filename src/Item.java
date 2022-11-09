@@ -2,6 +2,11 @@ public abstract class Item {
     int price;
     int level;
     String name;
+    public Item(String name, int price, int level){
+        this.name = name;
+        this.price = price;
+        this.level = level;
+    }
 
     public int getPrice() {
         return price;
