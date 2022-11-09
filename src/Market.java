@@ -32,4 +32,8 @@ public class Market {
         inventory.sortInventory();
         return price;
     }
+
+    public void displayMenu(){
+        inventory.displayInventory();
+    }
 }

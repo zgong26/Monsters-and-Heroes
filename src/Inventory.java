@@ -72,33 +72,39 @@ public class Inventory {
         int index = 0;
         System.out.println("Weapon: ");
         System.out.println("Name\tPrice\tLevel\tDamage\tRequired Hands");
-        while(inventory.get(index) instanceof Weapon){
+        while(index < inventory.size() && inventory.get(index) instanceof Weapon){
             System.out.printf("%d. %s\t%d\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Weapon) inventory.get(index)).getDamage(), ((Weapon) inventory.get(index)).getHandsValue());
+            index++;
         }
         System.out.println("Armor: ");
         System.out.println("Name\tPrice\tLevel\tDamage Reduction");
-        while(inventory.get(index) instanceof Armor){
+        while(index < inventory.size() && inventory.get(index) instanceof Armor){
             System.out.printf("%d. %s\t%d\t%d\t%d\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Armor) inventory.get(index)).getReduce());
+            index++;
         }
         System.out.println("Potion: ");
         System.out.println("Name\tPrice\tLevel\tAttribute Increase\tAttribute Affected");
-        while(inventory.get(index) instanceof Potion){
+        while(index < inventory.size() && inventory.get(index) instanceof Potion){
             System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Potion) inventory.get(index)).getIncrease(), ((Potion) inventory.get(index)).getAttributesStr());
+            index++;
         }
         System.out.println("FireSpell: ");
         System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(inventory.get(index) instanceof FireSpell){
+        while(index < inventory.size() && inventory.get(index) instanceof FireSpell){
             System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+            index++;
         }
         System.out.println("IceSpell: ");
         System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(inventory.get(index) instanceof IceSpell){
+        while(index < inventory.size() && inventory.get(index) instanceof IceSpell){
             System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+            index++;
         }
         System.out.println("LightningSpell: ");
         System.out.println("Name\tPrice\tLevel\tDamage\tMana Cost");
-        while(inventory.get(index) instanceof LightningSpell){
+        while(index < inventory.size() && inventory.get(index) instanceof LightningSpell){
             System.out.printf("%d. %s\t%d\t%d\t%d\t%s\n", index + 1, inventory.get(index).getName(), inventory.get(index).getPrice(), inventory.get(index).getLevel(), ((Spell) inventory.get(index)).getDamage(), ((Spell) inventory.get(index)).getMana());
+            index++;
         }
     }
 }

@@ -16,7 +16,7 @@ public abstract class Hero implements Character{
     Hand[] hands;
     Armor[] armors;
     boolean faint;
-    ArrayList<Item> inventory;
+    Inventory inventory;
     final int maxHands = 2;
     final int maxArmors = 2;
     public Hero(String name, int level, int mana, int strength, int dexterity, int agility, int gold, int experience){
@@ -33,7 +33,7 @@ public abstract class Hero implements Character{
         hands[0] = new Hand("left");
         hands[1] = new Hand("right");
         armors = new Armor[maxArmors];
-        inventory = new ArrayList<>();
+        inventory = new Inventory();
         faint = false;
     }
     public String getName(){return name;}
@@ -42,6 +42,11 @@ public abstract class Hero implements Character{
     public int getHP(){return HP;}
     public int getStrength(){return strength;}
     public int getAgility(){return agility;}
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     public boolean isFaint(){return faint;}
 
     public void setName(String name) {

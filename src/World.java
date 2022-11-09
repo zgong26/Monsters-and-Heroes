@@ -30,6 +30,10 @@ public class World extends Board{
         return playerPos;
     }
 
+    public Cell getPlayerCell(){
+        return board[playerPos[0]][playerPos[1]];
+    }
+
     //this method is used to generate a random world
     public void generateWorld(){
         int numCell = getNumOfSquares();

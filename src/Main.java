@@ -27,7 +27,8 @@ public class Main {
 
         }
         */
-
-
+        Warrior w = new Warrior("Gaerdal_Ironhand", 1,100,700,600,500,1354,7);
+        Game g = new Game();
+        g.start();
     }
 }
