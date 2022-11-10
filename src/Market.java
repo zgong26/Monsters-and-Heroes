@@ -1,3 +1,6 @@
+/*
+This class represents a unique market where inside could contain differen items.
+ */
 import java.util.*;
 public class Market {
     private Inventory inventory;

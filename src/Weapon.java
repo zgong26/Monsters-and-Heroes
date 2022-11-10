@@ -1,5 +1,5 @@
 /*
-This is the weapon interface which declares some unique properties for weapon items
+This is the weapon class which declares some unique properties for weapon items
  */
 public class Weapon extends Item {
     private int damage;

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /*
-This abstract character class encapsulates the commonplace between heroes and monsters
+This abstract Hero class implements Character and defines some unique and necessary features of Hero.
  */
 public abstract class Hero implements Character {
     String name;

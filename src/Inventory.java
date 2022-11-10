@@ -100,6 +100,17 @@ public class Inventory {
         return i;
     }
 
+    public ArrayList<Spell> getSpells() {
+        ArrayList<Spell> spells = new ArrayList<>();
+        for (Spell s : fireSpells)
+            spells.add(s);
+        for (Spell s : iceSpells)
+            spells.add(s);
+        for (Spell s : lightningSpells)
+            spells.add(s);
+        return spells;
+    }
+
     public int size() {
         return inventory.size();
     }

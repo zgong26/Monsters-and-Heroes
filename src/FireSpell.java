@@ -11,13 +11,17 @@ public class FireSpell extends Item implements Spell{
         this.mana = mana;
     }
 
-    @Override
+
     public int getDamage() {
         return damage;
     }
 
-    @Override
+
     public int getMana() {
         return mana;
+    }
+
+    public String getName() {
+        return name;
     }
 }

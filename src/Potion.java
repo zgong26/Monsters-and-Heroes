@@ -1,5 +1,5 @@
 /*
-This is the potion interface which declares some unique properties for potion items
+This is a concrete potion class that extends from Item, which represents a potion object in the game
  */
 public class Potion extends Item{
     private int increase;

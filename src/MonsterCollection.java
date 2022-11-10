@@ -1,3 +1,6 @@
+/*
+This class contains all monsters in the game
+ */
 import java.util.ArrayList;
 
 public class MonsterCollection {

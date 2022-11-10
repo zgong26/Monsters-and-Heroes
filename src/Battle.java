@@ -44,15 +44,11 @@ public class Battle {
     private void heroRound() {
         Hero next = heroes.nextAvailableHero();
         System.out.printf("\n%s's turn!\n", next.getName());
-        printMenu(next);
-        String choice = ErrorControl.StringInput(new String[]{"a", "s", "p", "e", "i"});
-        while (choice.equals("i")) {
-            info();
-            printMenu(next);
-            choice = ErrorControl.StringInput(new String[]{"a", "s", "p", "e", "i"});
-        }
+
         boolean moveOn = false;
         while (!moveOn) {
+            printMenu(next);
+            String choice = ErrorControl.StringInput(new String[]{"a", "s", "p", "e", "i"});
             switch (choice) {
                 case "a":
                     attack(next);
@@ -60,6 +56,7 @@ public class Battle {
                     break;
                 case "s":
                     moveOn = spell(next);
+                    break;
                 case "p":
                     moveOn = potion(next);
                     break;
@@ -68,6 +65,7 @@ public class Battle {
                     break;
                 case "i":
                     info();
+                    moveOn = false;
                     break;
                 default:
                     break;
@@ -109,6 +107,38 @@ public class Battle {
     }
 
     private boolean spell(Hero hero) {
+        ArrayList<Spell> spells = hero.getInventory().getSpells();
+        if (spells.size() == 0) {
+            System.out.println("You have no spell in your inventory!!");
+            return false;
+        }
+        for (int i = 0; i < spells.size(); i++) {
+            Spell spell = spells.get(i);
+            System.out.printf("%d. %s\tdamage: %d\tmana cost: %d\n\n", i + 1, spell.getName(), spell.getDamage(), spell.getMana());
+        }
+        System.out.println("Pick a spell('0' to quit spell menu): ");
+        int pick = ErrorControl.integerInput(0, spells.size());
+        if (pick == 0)
+            return false;
+        Spell s = spells.get(pick - 1);
+        hero.getInventory().remove((Item) s);
+        System.out.println("");
+        monsters.displayMonsters();
+        System.out.println("Which monster would like to use spell on?");
+        int index = ErrorControl.integerInput(1, monsters.size());
+        Monster monster = monsters.getMonster(index);
+        if (monster.isFaint()) {
+            System.out.println("You attacked a fainted monster! Nothing happened, you wasted a spell!");
+            return true;
+        } else {
+            monster.setHP(monster.getHP() - s.getDamage());
+            System.out.printf("Your spell caused %d damages to the monster!\n", s.getDamage());
+            if (monster.getHP() <= 0) {
+                System.out.println("Monster fainted!!");
+                monster.setFaint(true);
+            }
+            System.out.println("");
+        }
         return true;
     }
 
@@ -128,6 +158,7 @@ public class Battle {
         if (pick == 0)
             return false;
         Potion p = potions.get(pick - 1);
+        hero.getInventory().remove(p);
         increaseAttributes(hero, p.getAttributes(), p.getIncrease());
         for (String str : p.getAttributes()) {
             System.out.printf("%s increased by %d\n", str, p.getIncrease());
@@ -224,7 +255,6 @@ public class Battle {
         return true;
     }
 
-}
 
     private void monsterRound() {
         //each monster randomly attack a hero
