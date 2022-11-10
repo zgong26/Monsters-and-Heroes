@@ -65,12 +65,39 @@ public class Inventory {
         });
     }
 
+    public ArrayList<Potion> getPotions() {
+        return potions;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public ArrayList<Armor> getArmors() {
+        return armors;
+    }
+
+    public ArrayList<FireSpell> getFireSpells() {
+        return fireSpells;
+    }
+
+    public ArrayList<LightningSpell> getLightningSpells() {
+        return lightningSpells;
+    }
+
+    public ArrayList<IceSpell> getIceSpells() {
+        return iceSpells;
+    }
+
     public void add(Item i) {
         inventory.add(i);
+        sortInventory();
     }
 
     public Item remove(int index) {
-        return inventory.remove(index);
+        Item i = inventory.remove(index);
+        sortInventory();
+        return i;
     }
 
     public int size() {
@@ -79,6 +106,7 @@ public class Inventory {
 
     public void remove(Item i) {
         inventory.remove(i);
+        sortInventory();
     }
 
     public Item get(int index) {

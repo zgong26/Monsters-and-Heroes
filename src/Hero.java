@@ -110,9 +110,9 @@ public abstract class Hero implements Character {
         this.gold = gold;
     }
 
-    public void attack(Monster enemy) {
+    public String attack(Monster enemy) {
         int rawDamage = (int) ((strength + weaponDamage()) * 0.05);
-        enemy.beAttacked(rawDamage);
+        return enemy.beAttacked(rawDamage);
     }
 
     private int weaponDamage() {
@@ -155,6 +155,14 @@ public abstract class Hero implements Character {
         return String.valueOf(rawDamage);
     }
 
+    public Armor[] getArmors() {
+        return armors;
+    }
+
+    public void replaceArmor(int index, Armor a) {
+        armors[index] = a;
+    }
+
     private boolean dodged() {
         double rand = Math.random() * 100;
         if (rand <= (0.002 * agility))
@@ -180,7 +188,7 @@ public abstract class Hero implements Character {
         return inventory.get(menuIndex);
     }
 
-    public void removeItem(int menuIndex){
+    public void removeItem(int menuIndex) {
         menuIndex--;
         inventory.remove(menuIndex);
     }
@@ -191,4 +199,34 @@ public abstract class Hero implements Character {
 
 
     public abstract boolean updateLevel();
+
+    public void setMana(int i) {
+        mana = i;
+    }
+
+    public void addExp(int i) {
+        experience += i;
+    }
+
+    public void setDexterity(int i) {
+        dexterity = i;
+    }
+
+    public void equipWeapon(Weapon w) {
+        if (w.getHandsValue() == 2) {
+            hands[0].setWeapon(w);
+            hands[1].setWeapon(w);
+            return;
+        }
+        if (hands[0].isEmpty()) {
+            hands[0].setWeapon(w);
+        } else if (hands[1].isEmpty()) {
+            hands[1].setWeapon(w);
+        } else if (hands[0].getWeapon().getHandsValue() == 2) {
+            hands[0].setWeapon(w);
+            hands[1].setWeapon(null);
+        } else {
+            hands[0].setWeapon(w);
+        }
+    }
 }

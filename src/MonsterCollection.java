@@ -51,4 +51,8 @@ public class MonsterCollection {
         monsters.add(new Spirit("Taltecuhtli", 10, 300, 200, 50));
         monsters.add(new Spirit("Casper", 1, 100, 100, 50));
     }
+
+    public static ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
 }

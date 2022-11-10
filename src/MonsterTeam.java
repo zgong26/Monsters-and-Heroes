@@ -34,21 +34,39 @@ public class MonsterTeam {
 
     public void displayMonsters() {
         for (int i = 0; i < monsters.size(); i++) {
-            System.out.println("" + (i + 1) + ". " + monsters.get(i).getName());
+            String faint = monsters.get(i).isFaint() ? "(fainted)" : "";
+            System.out.println("" + (i + 1) + ". " + monsters.get(i).getName() + faint);
         }
     }
+
 
     public void displayStatistics() {
         for (int i = 0; i < monsters.size(); i++) {
             Monster monster = monsters.get(i);
             if (!monster.isFaint())
-                System.out.printf("%s: \nlevel%d  HP: %d  strength: %d  dodge chance: %d%",monster.getName(),monster.getLevel(),monster.getHP(),monster.getStrength(),monster.getChance());
+                System.out.printf("%s: \nlevel%d  HP: %d  strength: %d  dodge chance: 0.%d%%\n", monster.getName(), monster.getLevel(), monster.getHP(), monster.getStrength(), monster.getChance());
         }
     }
 
     public Monster getMonster(int menuIndex) {
         menuIndex--;
         return monsters.get(menuIndex);
+    }
+
+    public ArrayList<Integer> getUnfaintedIndices() {
+        ArrayList<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < monsters.size(); i++) {
+            if (!monsters.get(i).isFaint())
+                ls.add(i);
+        }
+        return ls;
+    }
+
+    public int levelSum(){
+        int sum = 0;
+        for(Monster m : monsters)
+            sum += m.getLevel();
+        return sum;
     }
 
 

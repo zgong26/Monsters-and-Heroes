@@ -54,6 +54,15 @@ public class HeroTeam {
         }
     }
 
+    public ArrayList<Integer> getUnfaintedIndices() {
+        ArrayList<Integer> ls = new ArrayList<>();
+        for (int i = 0; i < heroes.size(); i++) {
+            if (!heroes.get(i).isFaint())
+                ls.add(i);
+        }
+        return ls;
+    }
+
     public Hero getHero(int menuIndex) {
         menuIndex--;
         return heroes.get(menuIndex);
@@ -76,7 +85,9 @@ public class HeroTeam {
         //get next unfainted hero's index
         while (heroes.get(currentHeroIndex).isFaint())
             currentHeroIndex = (currentHeroIndex + 1) % heroes.size();
-        return heroes.get(currentHeroIndex);
+        Hero res = heroes.get(currentHeroIndex);
+        currentHeroIndex = (currentHeroIndex + 1) % heroes.size();
+        return res;
     }
 
     public void displayStatistics() {
@@ -87,5 +98,13 @@ public class HeroTeam {
                 faint = "(fainted!)";
             System.out.printf("%s%s: \nlevel%d  HP: %d  mana: %d  strength: %d  dexterity: %d  agility: %d  equipped weapon: %s\n", h.getName(), faint, h.getLevel(), h.getHP(), h.getMana(), h.getStrength(), h.getDexterity(), h.getAgility(), h.getWeapon());
         }
+    }
+
+    public int getHighestLevel() {
+        int max = 0;
+        for (Hero h : heroes) {
+            max = Math.max(max, h.getLevel());
+        }
+        return max;
     }
 }
