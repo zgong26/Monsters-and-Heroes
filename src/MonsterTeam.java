@@ -79,4 +79,9 @@ public class MonsterTeam {
             currentMonsterIndex = (currentMonsterIndex + 1) % monsters.size();
         return monsters.get(currentMonsterIndex);
     }
+
+    public void clear(){
+        monsters.clear();
+    }
+
 }

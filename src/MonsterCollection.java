@@ -58,4 +58,8 @@ public class MonsterCollection {
     public static ArrayList<Monster> getMonsters() {
         return monsters;
     }
+    public static void reset(){
+        monsters.clear();
+        addAll();
+    }
 }

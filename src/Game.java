@@ -170,6 +170,8 @@ public class Game {
             }
             state = "map";
         }
+        monsters.clear();
+        MonsterCollection.reset();
     }
 
     private void marketState() {
@@ -253,8 +255,8 @@ public class Game {
 
     private void inventoryState() {
         System.out.println("");
-        for(int i = 1; i <= heroes.size(); i++){
-            System.out.println(heroes.getHero(i).getName()+": ");
+        for (int i = 1; i <= heroes.size(); i++) {
+            System.out.println(heroes.getHero(i).getName() + ": ");
             heroes.getHero(i).getInventory().displayInventory();
         }
     }
