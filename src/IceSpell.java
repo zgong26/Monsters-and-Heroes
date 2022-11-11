@@ -23,4 +23,8 @@ public class IceSpell extends Item implements Spell {
     public String getName() {
         return name;
     }
+    @Override
+    public String getType(){
+        return "ice";
+    }
 }

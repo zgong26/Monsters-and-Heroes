@@ -24,4 +24,9 @@ public class FireSpell extends Item implements Spell{
     public String getName() {
         return name;
     }
+
+    @Override
+    public String getType() {
+        return "fire";
+    }
 }

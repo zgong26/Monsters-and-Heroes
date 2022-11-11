@@ -80,12 +80,13 @@ public class Game {
         boolean marketOption = false;
         System.out.println("Enter 'w s a d' to move");
         System.out.println("'i' to display heroes' inventory");
+        System.out.println("'h' to display heroes' info");
         if (world.getPlayerCell().getType().equals("market")) {
             marketOption = true;
             System.out.println("'m' to open market");
         }
         System.out.println("'exit' to exit the game");
-        String[] validInput = {"w", "s", "a", "d", "m", "i", "exit"};
+        String[] validInput = {"w", "s", "a", "d", "m", "i", "h", "exit"};
         String choice = ErrorControl.StringInput(validInput).toLowerCase();
         boolean validMove = true;
         boolean moveChoice = false;//track whether player makes a move
@@ -115,6 +116,9 @@ public class Game {
                 break;
             case "i":
                 inventoryState();
+                break;
+            case "h":
+                heroes.displayStatistics();
                 break;
             case "exit":
                 state = "exit";

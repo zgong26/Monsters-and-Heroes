@@ -120,8 +120,13 @@ public class Battle {
         int pick = ErrorControl.integerInput(0, spells.size());
         if (pick == 0)
             return false;
-        Spell s = spells.get(pick - 1);
+        Spell s = spells.get(pick - 1);//spell object that will be used
+        if (s.getMana() > hero.getMana()) {
+            System.out.println("You don't have enough mana to use this spell!");
+            return false;
+        }
         hero.getInventory().remove((Item) s);
+        hero.setMana(hero.getMana() - s.getMana());
         System.out.println("");
         monsters.displayMonsters();
         System.out.println("Which monster would like to use spell on?");
@@ -133,6 +138,16 @@ public class Battle {
         } else {
             monster.setHP(monster.getHP() - s.getDamage());
             System.out.printf("Your spell caused %d damages to the monster!\n", s.getDamage());
+            if (s.getType().equals("ice")) {
+                monster.setStrength((int) (monster.getStrength() * 0.9));
+                System.out.printf("Your spell also reduced monster's %s by %d%%!\n", "damage", 10);
+            } else if (s.getType().equals("fire")) {
+                monster.setDefenseValue((int) (monster.getDefenseValue() * 0.9));
+                System.out.printf("Your spell also reduced monster's %s by %d%%!\n", "defense", 10);
+            } else if (s.getType().equals("lightning")) {
+                monster.setChance((int) (monster.getChance() * 0.9));
+                System.out.printf("Your spell also reduced monster's %s by %d%%!\n", "dodge chance", 10);
+            }
             if (monster.getHP() <= 0) {
                 System.out.println("Monster fainted!!");
                 monster.setFaint(true);
@@ -276,13 +291,16 @@ public class Battle {
                     hero.setFaint(true);
                 }
             }
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             if (heroes.isAllFainted()) {
                 gameover = true;
                 break;
             }
         }
-
-
     }
 
 }

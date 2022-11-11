@@ -6,4 +6,5 @@ public interface Spell {
     public int getMana();
 
     public String getName();
+    public String getType();
 }

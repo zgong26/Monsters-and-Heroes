@@ -5,9 +5,8 @@ public class Main {
         do{
             Game g = new Game();
             g.start();
-            System.out.println("Would you like to continue?(y/n)");
+            System.out.println("Would you like another game?(y/n)");
             choice = ErrorControl.StringInput(new String[]{"y", "n"});
         }while(choice.equals("y"));
-
     }
 }
